@@ -1,26 +1,15 @@
-import { create } from 'zustand'
-
-const useStore = create((set) => ({
-  count: 1,
-  inc: () => set((state) => ({ count: state.count + 1 })),
-}))
-
-function Counter() {
-  const { count, inc } = useStore()
-  return (
-    <div class="counter">
-      <span>{count}</span>
-      <button onClick={inc}>one up</button>
-    </div>
-  )
-}
+import Cart from './Components/Cart'
+import ProductCreator from './Components/ProductCreator'
+import Products from './Components/Products'
 
 function App() {
   return (
     <div>
-      <div>hello</div>
-      <div>hello</div>
-      <div>{Counter()}</div>
+      <div className="ml-[20px] flex flex-row justify-between">
+        <ProductCreator />
+        <Products />
+        <Cart />
+      </div>
     </div>
   )
 }
