@@ -37,7 +37,7 @@ const Form = () => {
           maxLength: 250,
         })}
       />
-      <input type="submit" />
+      <input className="hover:cursor-pointer" type="submit" />
     </form>
   )
 }
