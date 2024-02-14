@@ -5,7 +5,7 @@ import Products from './Components/Products'
 function App() {
   return (
     <div>
-      <div className="ml-[20px] flex flex-row justify-between">
+      <div className="flex flex-row justify-between">
         <ProductCreator />
         <Products />
         <Cart />
