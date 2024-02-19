@@ -1,6 +1,6 @@
 import Cart from './Components/Cart'
 import ProductCreator from './Components/ProductCreator'
-import Products from './Components/Products'
+import Products from './Components/ProductsColumn'
 
 function App() {
   return (

@@ -1,11 +1,10 @@
 import React from 'react'
 import { useForm } from 'react-hook-form'
 
-const Form = () => {
+const Form = ({ state }) => {
   const { register, handleSubmit } = useForm()
-  const onSubmit = (data) => console.log(data)
   return (
-    <form className="flex flex-col gap-2" onSubmit={handleSubmit(onSubmit)}>
+    <form className="flex flex-col gap-2">
       <input
         placeholder="product"
         className="border border-[#b9b9b9] p-2"
