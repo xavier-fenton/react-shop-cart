@@ -3,10 +3,11 @@ import ProductCreator from './Components/ProductCreator'
 import Products from './Components/ProductsColumn'
 
 function App() {
+  const state = 'Creating'
   return (
     <div>
       <div className="flex flex-row justify-between">
-        <ProductCreator />
+        <ProductCreator state={state} />
         <Products />
         <Cart />
       </div>

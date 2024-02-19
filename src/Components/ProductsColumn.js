@@ -1,18 +1,22 @@
 import React from 'react'
 import Products from './Products'
-// import { shallow } from 'zustand/shallow'
+import { useStore } from '../store'
 
-const ProductsColumn = () => {
-  // const products = useStore(
-  //   (store) => store.products.filter((product) => product.state === state),
-  //   shallow
-  // )
-  const state = 'test'
+const ProductsColumn = ({ state }) => {
+  const products = useStore((store) => store.products)
+
   return (
     <div className="flex flex-col items-center">
       <div>Products</div>
       <div className="bg-[#fffbfb] border h-[500px] w-[350px] shadow-lg">
-        <Products state={state} />
+        {products.map((products) => (
+          <Products
+            title={products.title}
+            key={products.title}
+            price={products.price}
+            description={products.description}
+          />
+        ))}
       </div>
     </div>
   )

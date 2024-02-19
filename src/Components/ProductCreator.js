@@ -1,9 +1,12 @@
 import React, { useState } from 'react'
 import ProductCreatorForm from './ProductCreatorForm.js'
+import { useStore } from '../store.js'
 
-const ProductCreator = () => {
-  const [active, setActive] = useState(false)
-
+const ProductCreator = ({ state }) => {
+  const products = useStore((store) =>
+    store.products.filter((products) => products.state === state)
+  )
+  const [active, setActive] = useState(state)
   return (
     <div className="flex flex-col items-center">
       <div className="bg-[#fffbfb] border h-[100dvh] w-[350px] shadow-lg">
@@ -25,7 +28,7 @@ const ProductCreator = () => {
         </div>
         {active ? (
           <div className="relative m-[10px] border bg-[#ffffff] shadow-sm p-[10px]">
-            <ProductCreatorForm />
+            <ProductCreatorForm products={products} />
           </div>
         ) : null}
       </div>

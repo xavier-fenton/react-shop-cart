@@ -1,7 +1,15 @@
-import { create } from 'zustand'
+import { createWithEqualityFn } from 'zustand/traditional'
 
 const store = (set) => ({
-  products: [{ title: 'Test Product', state: 'Creating' }],
+  products: [
+    {
+      title: 'Product Test',
+      price: 50,
+      inventory: 1,
+      description: 'Products is cool',
+      state: 'Creating',
+    },
+  ],
 })
 
-export const useStore = create(store)
+export const useStore = createWithEqualityFn(store)
