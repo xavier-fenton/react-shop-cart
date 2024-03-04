@@ -15,6 +15,7 @@ const ProductsColumn = ({ state }) => {
             key={products.title}
             price={products.price}
             description={products.description}
+            state={products.state}
           />
         ))}
       </div>

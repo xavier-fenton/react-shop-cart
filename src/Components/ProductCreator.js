@@ -6,7 +6,7 @@ const ProductCreator = ({ state }) => {
   const products = useStore((store) =>
     store.products.filter((products) => products.state === state)
   )
-  const [active, setActive] = useState(state)
+  const [active, setActive] = useState(false)
   return (
     <div className="flex flex-col items-center">
       <div className="bg-[#fffbfb] border h-[100dvh] w-[350px] shadow-lg">
@@ -16,7 +16,7 @@ const ProductCreator = ({ state }) => {
         <div
           className="flex flex-row items-center hover:cursor-pointer w-fit"
           onClick={() => {
-            setActive(!active)
+            setActive(true)
           }}
         >
           <img
