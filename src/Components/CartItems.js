@@ -8,6 +8,7 @@ const CartItems = ({ state, cartItems }) => {
         cartItems.map((products) => {
           return (
             <div
+              data-testid="product_test"
               key={uuidv4()}
               className="p-[10px] m-[10px] border bg-[#ffffff]"
             >
