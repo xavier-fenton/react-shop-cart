@@ -24,15 +24,11 @@ test('If Cart is empty, renders cart empty text', async () => {
 })
 
 test('That App loads and displays the cart section, given the state of the cart is filled and displays a total from the items', async () => {
-  
   if (skipRemainingTests) return
-  // Arrange
   render(<App />)
   const cartComponent = screen.getByText('Your Cart')
   const totalId = screen.getByTestId('cart_total')
 
-  // Act
-  // Assert
   expect(cartComponent).toBeInTheDocument()
   expect(totalId).toBeInTheDocument()
 })
