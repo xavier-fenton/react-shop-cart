@@ -34,3 +34,5 @@ describe('Test all within Cart component', () => {
     expect(product_id).toBeInTheDocument()
   })
 })
+
+// Write a test that mocks the useMemo function in cart.js
