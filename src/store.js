@@ -9,6 +9,13 @@ const store = (set) => ({
       description: 'Products is cool',
       state: 'Created',
     },
+    // {
+    // //   title: 'Product2',
+    // //   price: 60,
+    // //   inventory: 1,
+    // //   description: 'Products is cool',
+    // //   state: 'Cart',
+    // // },
   ],
 })
 
