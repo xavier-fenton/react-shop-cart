@@ -7,7 +7,7 @@ const store = (set) => ({
       price: 50,
       inventory: 1,
       description: 'Products is cool',
-      state: 'Created',
+      state: 'Cart',
     },
     // {
     // //   title: 'Product2',
