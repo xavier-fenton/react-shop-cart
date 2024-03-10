@@ -54,6 +54,10 @@ const context = {
       state: 'Cart',
     },
   ],
+  removeFromCart: (item) => {
+    console.log(item)
+    
+  },
 }
 
 export const productContext = createContext(context)

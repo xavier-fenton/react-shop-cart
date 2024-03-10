@@ -1,7 +1,10 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { productContext } from '../shopContext'
+
 import { v4 as uuidv4 } from 'uuid'
 
 const CartItems = ({ items }) => {
+  const removeFromCart = useContext(productContext)
   return (
     <>
       {items.state === 'Cart' ? (
@@ -17,6 +20,16 @@ const CartItems = ({ items }) => {
             <div key={uuidv4()}>{items.inventory}</div>
             <div key={uuidv4()}>${items.price}</div>
           </div>
+          <button
+            onClick={(e) => {
+              e.preventDefault()
+              console.log('clicked')
+              removeFromCart.removeFromCart(items)
+            }}
+            className="border w-fit p-2 rounded-md text-[10px] text-[#e6e6e6] bg-[#b4b4b4]"
+          >
+            remove
+          </button>
         </div>
       ) : (
         <div
