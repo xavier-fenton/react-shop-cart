@@ -6,6 +6,7 @@ import reportWebVitals from './reportWebVitals'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import './index.css'
 import Test from './Components/Test'
+import ProductsColumn from './Components/ProductsColumn'
 
 const router = createBrowserRouter([
   {
@@ -15,6 +16,10 @@ const router = createBrowserRouter([
   {
     path: '/test',
     element: <Test />,
+  },
+  {
+    path: '/products',
+    element: <ProductsColumn />,
   },
 ])
 const root = ReactDOM.createRoot(document.getElementById('root'))

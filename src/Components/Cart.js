@@ -1,44 +1,40 @@
-import React, { useMemo, useState } from 'react'
+import React, { useContext, useMemo } from 'react'
 import CartItems from './CartItems'
-import { useStore } from '../store'
+import { productContext } from '../shopContext'
+import { v4 as uuidv4 } from 'uuid'
 
-const Cart = ({ state }) => {
-  const cartItems = useStore((store) =>
-    store.products.filter((products) => products.state === state)
-  )
-  const [total, setTotal] = useState(
-    cartItems.length === 1 ? cartItems[0].price : null
-  )
+const Cart = () => {
+  const context = useContext(productContext)
+  const cartContext = context.cartItems.filter((cart_Items) => {
+    return cart_Items.state === 'Cart'
+  })
 
-  const totals = useMemo(() => {
-    if (cartItems.length === 1) {
-      return setTotal(cartItems[0].price)
-    } else if (cartItems.length !== 1) {
-      let prices = []
-      cartItems.forEach((object) => {
-        prices.push(object.price)
-      })
-      let collected_totals = prices.reduce((accum, prev) => {
-        return accum + prev
-      }, total)
-      return collected_totals
+  const cart_products = useMemo(() => {
+    let total = 0
+    if (cartContext.length >= 1) {
+      total = cartContext.reduce(
+        (accum, cart_product) => accum + cart_product.price,
+        0
+      )
     }
-  }, [total])
+    return total
+  }, [cartContext])
 
   return (
-    <div className="flex flex-col items-center">
+    <div className="flex flex-col items-center h-[100dvh]">
       <div className="bg-[#f1efef] border border-[#f1efef] h-[100dvh] w-[350px] shadow-xl">
         <div className="font-bold text-center pt-[10px]">Your Cart</div>
-        <CartItems state={state} cartItems={cartItems} />
-        {state === 'Cart' ? (
-          <div
-            aria-label="cost-total"
-            data-testid="cart_total"
-            className="flex justify-end pr-6
-        "
-          >
-            Total: ${totals ? totals : total}
-          </div>
+        {context.cartItems.length >= 1 ? (
+          cartContext.map((products) => (
+            <div key={uuidv4()} className="flex flex-col">
+              <CartItems items={products} key={uuidv4()} />
+            </div>
+          ))
+        ) : (
+          <div className="text-center">cart empty</div>
+        )}
+        {cartContext.length !== 0 ? (
+          <div className="flex justify-end px-5">Total: ${cart_products} </div>
         ) : null}
       </div>
     </div>
