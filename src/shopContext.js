@@ -1,6 +1,6 @@
 import { createContext } from 'react'
 
-const context = {
+const ProductContext = {
   products: [
     {
       title: 'Product Test',
@@ -26,28 +26,7 @@ const context = {
   ],
   cartItems: [
     {
-      title: 'Product Test',
-      price: 50,
-      inventory: 1,
-      description: 'Products is cool',
-      state: 'Cart',
-    },
-    {
-      title: 'Product Test2',
-      price: 50,
-      inventory: 1,
-      description: 'Products is cool',
-      state: 'Cart',
-    },
-    {
-      title: 'Product Test',
-      price: 50,
-      inventory: 1,
-      description: 'Products is cool',
-      state: 'Cart',
-    },
-    {
-      title: 'Product Test2',
+      title: 'Product Test3',
       price: 50,
       inventory: 1,
       description: 'Products is cool',
@@ -55,9 +34,19 @@ const context = {
     },
   ],
   removeFromCart: (item) => {
+    const updateCartItems = ProductContext.cartItems.filter(
+      (cartProduct) => cartProduct.title !== item.title
+    )
+    ProductContext.setCartItems(updateCartItems)
+  },
+
+  setCartItems: (item) => {
+    ProductContext.cartItems = [...ProductContext.cartItems, item]
+  },
+  addToCart: (item, state) => {
     console.log(item)
-    
+    ProductContext.setCartItems((prevCartItems) => [...prevCartItems, item])
   },
 }
 
-export const productContext = createContext(context)
+export const productContext = createContext(ProductContext)

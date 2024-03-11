@@ -1,6 +1,13 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { productContext } from '../shopContext'
 
-const Products = ({ title, price, description, state }) => {
+const Products = ({ title, price, description, state, inventory }) => {
+  const context = useContext(productContext)
+  const item = { title, price, description, state, inventory }
+  const handleClick = (items) => {
+    context.setCartItems(items)
+  }
+
   return (
     <div>
       {state === 'Created' ? (
@@ -15,7 +22,14 @@ const Products = ({ title, price, description, state }) => {
           <div className="bg-[#b4b4b4] rounded w-fit px-[5px] text-sm text-[#fff5f5] flex flex-row gap-2">
             <div className="text-[#ffffff]">${price}</div>
           </div>
-          <button className="bg-[#adadad] w-fit text-xs p-[10px] rounded-3xl text-[#fff]">
+          <button
+            className="bg-[#adadad] w-fit text-[10px] p-[10px] rounded-3xl text-[#fff]"
+            onClick={(e) => {
+              e.preventDefault()
+              console.log('clicked')
+              handleClick(item)
+            }}
+          >
             Add to cart
           </button>
         </div>

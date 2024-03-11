@@ -3,7 +3,7 @@ import ProductCreator from './Components/ProductCreator'
 import Products from './Components/ProductsColumn'
 import ViewProducts from './Components/ViewProducts'
 import { useStore } from './store'
-
+import { productContext } from './shopContext'
 function App() {
   //Global state for testing
   // let findState = useStore((store) =>
@@ -16,9 +16,11 @@ function App() {
   return (
     <div>
       <div className="flex flex-row justify-between">
-        <ProductCreator />
-        <ViewProducts />
-        <Cart />
+        <productContext.Provider value={productContext}>
+          <ProductCreator />
+          <ViewProducts />
+          <Cart />
+        </productContext.Provider>
       </div>
     </div>
   )
