@@ -1,31 +1,132 @@
 # Creating a basic shop to understand global state, React and Tailwind
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Documenting the process
+1. Currently building a store using JavaScript.
+ <br>
+ <br>
 
-## Available Scripts
+ First initialization of this project, I install Zustand for managing Global state (A small global state library package that reduces the difficulties that you may have face when using a library like Redux). I know I wanted to persist the state of my Cart across all pages of the project, therefore I was quick to jump to installing it. 
+ 
+ But I soon found out about useContext, which I thought was a better use case as I feel using libraries that are built in to a framework is much better than using sourced/ external libraries.
 
-In the project directory, you can run:
+ After using Zustand for a bit, and creating the store, with all my neccessary values. eg: Products, ProductsInCart and the functions I needed such as adding a new procuct, adding and removing from the Cart. Making the switch over to useContext wasn't too difficult. The Zustand store can easily be recreated and refactored into a useContext scenerio. Which I did. 
 
-### `npm start`
+ But now I face a problem, of not knowing how to use useContext in the correct way. So I refactored my code again and am basically back at the start. 
 
-### `npm test`
+ What I think I will be doing is redoing the whole project, and initialising it into TypeScript. I believe this will help me practice TypeScript while at the same time understand useContext a little better.
 
-### `npm run build`
+ ```javascript
+  // shopContext.js
+  // The current state of my context provider looks like:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+  import { createContext } from 'react'
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+const ProductContext = {
+  products: [
+    {
+      title: 'Product Test',
+      price: 50,
+      inventory: 1,
+      description: 'Products is cool',
+      state: 'Created',
+    },
+    {
+      title: 'Product Test2',
+      price: 50,
+      inventory: 1,
+      description: 'Products is cool',
+      state: 'Created',
+    },
+    {
+      title: 'Product Test3',
+      price: 50,
+      inventory: 1,
+      description: 'Products is cool',
+      state: 'Created',
+    },
+  ],
+  cartItems: [
+    {
+      title: 'Product Test3',
+      price: 50,
+      inventory: 1,
+      description: 'Products is cool',
+      state: 'Cart',
+    },
+  ],
+  removeFromCart: (item) => {
+    const updateCartItems = ProductContext.cartItems.filter(
+      (cartProduct) => cartProduct.title !== item.title
+    )
+    ProductContext.setCartItems(updateCartItems)
+  },
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+  setCartItems: (item) => {
+    ProductContext.cartItems = [...ProductContext.cartItems, item]
+  },
+  addToCart: (item, state) => {
+    console.log(item)
+    ProductContext.setCartItems((prevCartItems) => [...prevCartItems, item])
+  },
+}
 
-### `npm run eject`
+export const productContext = createContext(ProductContext)
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+ ```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+ ```js
+//  I'm going to apply this to a data.json file where I can replicate if I were fetching data from an api or database
+ 
+const ProductContext = {
+    products: [
+      {
+        title: 'Product Test',
+        price: 50,
+        inventory: 1,
+        description: 'Products is cool',
+        state: 'Created',
+      },
+      {
+        title: 'Product Test2',
+        price: 50,
+        inventory: 1,
+        description: 'Products is cool',
+        state: 'Created',
+      },
+      {
+        title: 'Product Test3',
+        price: 50,
+        inventory: 1,
+        description: 'Products is cool',
+        state: 'Created',
+      },
+    ],
+    cartItems: [
+      {
+        title: 'Product Test3',
+        price: 50,
+        inventory: 1,
+        description: 'Products is cool',
+        state: 'Cart',
+      },
+    ],
+  }
+ ```
+## Basic usage of useContext
+ ```js
+ 
+ const ThemeContext = createContext()
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+function App() {
+  const [theme, setTheme] = useState("dark")
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+  return (
+    <ThemeContext.Provider value={{ theme, setTheme }}>
+      <ChildComponent />
+    </ThemeContext.Provider>
+  )
+}
+ ```
+
+
+
