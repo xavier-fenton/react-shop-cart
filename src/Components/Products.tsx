@@ -1,10 +1,20 @@
 import React, { useContext } from 'react'
 import { productContext } from '../shopContext'
 
-const Products = ({ title, price, description, state, inventory }) => {
+type Props = {
+  title: string,
+  price: number,
+  description: string,
+  state: string,
+  inventory: number,
+}
+
+
+const Products = ({ title, price, description, state, inventory }:Props) => {
   const context = useContext(productContext)
   const item = { title, price, description, state, inventory }
-  const handleClick = (items) => {
+  
+  const handleClick = (items: object) => {    
     context.setCartItems(items)
   }
 
