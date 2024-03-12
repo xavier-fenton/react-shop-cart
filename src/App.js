@@ -1,16 +1,16 @@
 import Cart from './Components/Cart'
 import ProductCreator from './Components/ProductCreator'
 import ViewProducts from './Components/ViewProducts'
-import { productContext } from './shopContext'
+import { ShoppingCartProvider } from './shopContext'
 function App() {
   return (
     <div>
       <div className="flex flex-row justify-between">
-        <productContext.Provider value={productContext}>
+        <ShoppingCartProvider>
           <ProductCreator />
           <ViewProducts />
           <Cart />
-        </productContext.Provider>
+        </ShoppingCartProvider>
       </div>
     </div>
   )
