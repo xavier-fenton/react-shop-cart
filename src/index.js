@@ -5,7 +5,7 @@ import App from './App'
 import reportWebVitals from './reportWebVitals'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import './index.css'
-import Test from './Components/Test'
+import Test from './Components/Test.tsx'
 import ProductsColumn from './Components/ProductsColumn'
 
 const router = createBrowserRouter([
