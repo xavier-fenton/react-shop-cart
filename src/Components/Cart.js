@@ -1,42 +1,50 @@
-import React, { useContext, useMemo } from 'react'
+import React, { useEffect, useState } from 'react'
 import CartItems from './CartItems'
-import { productContext } from '../shopContext'
-
 const Cart = () => {
-  const context = useContext(productContext)
-  const cartContext = context.cartItems
-    ? context.cartItems.filter((cart_Items) => {
-        return cart_Items.state === 'Cart'
-      })
-    : null
+  const [value, setValue] = useState([])
+  const [loading, setLoading] = useState(true)
+  const [empty, setEmpty] = useState(true)
+  const length = value.length !== 0
 
-  const cart_products = useMemo(() => {
-    let total = 0
-    if (cartContext.length >= 1) {
-      total = cartContext.reduce(
-        (accum, cart_product) => accum + cart_product.price,
-        0
-      )
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const localItems = localStorage.getItem('localtest')
+        if (localItems) {
+          setValue(JSON.parse(localItems))
+          setEmpty(false)
+        }
+      } catch (error) {
+        console.error('Error fetching data from localStorage:', error)
+      } finally {
+        setLoading(false)
+      }
     }
-    return total
-  }, [cartContext])
+
+    fetchData()
+  }, [empty, length])
+
+  const loader = <div>loading...</div>
+
+  const cart_empty = <div>cart empty</div>
 
   return (
     <div className="flex flex-col items-center h-[100dvh]">
       <div className="bg-[#f1efef] border border-[#f1efef] h-[100dvh] w-[350px] shadow-xl">
         <div className="font-bold text-center pt-[10px]">Your Cart</div>
-        {context && context.cartItems.length >= 1 ? (
-          cartContext.map((products) => (
-            <div className="flex flex-col">
-              <CartItems items={products} />
-            </div>
-          ))
-        ) : (
-          <div className="text-center">cart empty</div>
-        )}
-        {cartContext.length !== 0 ? (
-          <div className="flex justify-end px-5">Total: ${cart_products} </div>
-        ) : null}
+        {loading ? loader : null}
+        {!loading && value
+          ? value.map((product) => {
+              return (
+                <>
+                  <div className="flex flex-col">
+                    <CartItems items={product} />
+                  </div>
+                </>
+              )
+            })
+          : null}
+        {empty === true ? cart_empty : null}
       </div>
     </div>
   )
