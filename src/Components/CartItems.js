@@ -1,17 +1,9 @@
-import React, { useContext, useMemo } from 'react'
-import { productContext } from '../shopContext'
-
-// import { v4 as uuidv4 } from 'uuid'
+import React from 'react'
 
 const CartItems = ({ items }) => {
-  const context = useContext(productContext)
-  useMemo(() => {
-    console.log(items)
-  }, [items])
-
   return (
     <>
-      {items.state === 'Cart' ? (
+      {items !== null ? (
         <div
           data-testid="product_test"
           className="p-[10px] m-[10px] border bg-[#ffffff]"
@@ -28,7 +20,6 @@ const CartItems = ({ items }) => {
               onClick={(e) => {
                 e.preventDefault()
                 console.log('clicked')
-                context.removeFromCart(items)
               }}
               className="border w-fit p-2 rounded-md text-[10px] text-[#e6e6e6] bg-[#b4b4b4]"
             >
@@ -36,11 +27,7 @@ const CartItems = ({ items }) => {
             </button>
           </div>
         </div>
-      ) : (
-        <div data-testid="cart_empty" className="pt-[20px] text-center">
-          cart empty
-        </div>
-      )}
+      ) : null}
     </>
   )
 }
