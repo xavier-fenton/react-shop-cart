@@ -16,15 +16,26 @@ const CartItems = ({ items }) => {
             <div>${items.price}</div>
           </div>
           <div>
-            <button
-              onClick={(e) => {
-                e.preventDefault()
-                console.log('clicked')
-              }}
-              className="border w-fit p-2 rounded-md text-[10px] text-[#e6e6e6] bg-[#b4b4b4]"
-            >
-              remove
-            </button>
+            <div className="flex flex-row justify-between">
+              <button
+                onClick={(e) => {
+                  e.preventDefault()
+                  console.log('clicked')
+                }}
+                className="border w-fit p-2 rounded-md text-[10px] text-[#e6e6e6] bg-[#b4b4b4]"
+              >
+                update inventory
+              </button>
+              <button
+                onClick={(e) => {
+                  e.preventDefault()
+                  console.log('clicked')
+                }}
+                className="border w-fit p-2 rounded-md text-[10px] text-[#e6e6e6] bg-[#b4b4b4]"
+              >
+                remove
+              </button>
+            </div>
           </div>
         </div>
       ) : null}

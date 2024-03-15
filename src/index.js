@@ -7,7 +7,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import './index.css'
 import Test from './Components/Test.tsx'
 import ProductsColumn from './Components/ProductsColumn'
-import { ShoppingCartProvider } from './shopContext'
+import { ShoppingCartProvider } from './context/shopContext'
 import TestLocalStorage from './Components/TestLocalStorage'
 
 const router = createBrowserRouter([

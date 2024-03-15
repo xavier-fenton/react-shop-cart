@@ -9,7 +9,7 @@ const Cart = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const localItems = localStorage.getItem('localtest')
+        const localItems = localStorage.getItem('shopping_cart')
         if (localItems) {
           setValue(JSON.parse(localItems))
           setEmpty(false)

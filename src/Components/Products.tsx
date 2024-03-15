@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { ProductsProps,  useShoppingCart } from '../shopContext'
+import { ProductsProps,  useShoppingCart } from '../context/shopContext'
 
 
 const Products: React.FC<ProductsProps> = ({products}) => {

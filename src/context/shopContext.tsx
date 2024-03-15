@@ -1,5 +1,5 @@
 import { createContext, useContext, ReactNode} from 'react'
-import useLocalStorage from './hooks/useLocalStorage';
+import useLocalStorage from '../hooks/useLocalStorage';
 
 export interface CartItems
 {
@@ -35,7 +35,7 @@ export function useShoppingCart() {
 }
 
 export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
-
+ const [shopItem, setShopItem ] = useLocalStorage('shopping_cart', [])
 
 
   // function removeFromCart(item: CartItems, cartItems: CartItems[]): void {
@@ -55,15 +55,16 @@ export function ShoppingCartProvider({ children }: ShoppingCartProviderProps) {
 
   
   function addToCart(item: CartItems): void {
-    console.log(item);
-    
+    // a function in setshopitem that returns items, if there are items append to the array, if no items set return just item
+    if(shopItem.length >= 1){
+      setShopItem(() => {
+        return [...shopItem, item]
+      })
+    } else return setShopItem([item])
+ 
     increaseCartItems(item)
   }
-  // const contextValue: ShoppingCartContext = {
-  //   addToCart,
-  //   removeFromCart,
-  //   setCartItems
-  // };
+  
 
   return (
     <ShoppingCartContext.Provider

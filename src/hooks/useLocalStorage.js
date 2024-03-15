@@ -6,6 +6,7 @@ const useLocalStorage = (key, initialValue) => {
     if (jsonValue != null) return JSON.parse(jsonValue)
 
     if (typeof initialValue === 'function') {
+      // if funtion we return the value
       return initialValue()
     } else {
       return initialValue

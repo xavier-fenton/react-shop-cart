@@ -1,7 +1,7 @@
 import Cart from './Components/Cart'
 import ProductCreator from './Components/ProductCreator'
 import ViewProducts from './Components/ViewProducts'
-import { ShoppingCartProvider } from './shopContext'
+import { ShoppingCartProvider } from './context/shopContext'
 function App() {
   return (
     <div>
