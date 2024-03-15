@@ -1,36 +1,33 @@
 import React from 'react'
-import { v4 as uuidv4 } from 'uuid'
 
-const CartItems = ({ state, cartItems }) => {
+const CartItems = ({ items }) => {
   return (
     <>
-      {state === 'Cart' ? (
-        cartItems.map((products) => {
-          return (
-            <div
-              data-testid="product_test"
-              key={uuidv4()}
-              className="p-[10px] m-[10px] border bg-[#ffffff]"
-            >
-              <div key={uuidv4()} className="border-b-[1px] border-dashed">
-                <div key={uuidv4()}>{products.title}</div>
-              </div>
-              <div key={uuidv4()} className="flex justify-between py-5">
-                <div key={uuidv4()}>{products.inventory}</div>
-                <div key={uuidv4()}>${products.price}</div>
-              </div>
-            </div>
-          )
-        })
-      ) : (
+      {items !== null ? (
         <div
-          data-testid="cart_empty"
-          key={uuidv4()}
-          className="pt-[20px] text-center"
+          data-testid="product_test"
+          className="p-[10px] m-[10px] border bg-[#ffffff]"
         >
-          cart empty
+          <div className="border-b-[1px] border-dashed">
+            <div>{items.title}</div>
+          </div>
+          <div className="flex justify-between py-5">
+            <div>{items.inventory}</div>
+            <div>${items.price}</div>
+          </div>
+          <div>
+            <button
+              onClick={(e) => {
+                e.preventDefault()
+                console.log('clicked')
+              }}
+              className="border w-fit p-2 rounded-md text-[10px] text-[#e6e6e6] bg-[#b4b4b4]"
+            >
+              remove
+            </button>
+          </div>
         </div>
-      )}
+      ) : null}
     </>
   )
 }

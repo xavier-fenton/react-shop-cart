@@ -5,7 +5,10 @@ import App from './App'
 import reportWebVitals from './reportWebVitals'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import './index.css'
-import Test from './Components/Test'
+import Test from './Components/Test.tsx'
+import ProductsColumn from './Components/ProductsColumn'
+import { ShoppingCartProvider } from './shopContext'
+import TestLocalStorage from './Components/TestLocalStorage'
 
 const router = createBrowserRouter([
   {
@@ -15,6 +18,19 @@ const router = createBrowserRouter([
   {
     path: '/test',
     element: <Test />,
+  },
+  {
+    path: '/testLocalStorage',
+    element: <TestLocalStorage />,
+  },
+  {
+    path: '/products',
+    element: (
+      //this is weird: refactor at some point
+      <ShoppingCartProvider>
+        <ProductsColumn />
+      </ShoppingCartProvider>
+    ),
   },
 ])
 const root = ReactDOM.createRoot(document.getElementById('root'))
