@@ -1,49 +1,39 @@
-import React, { useContext } from 'react'
-import { productContext } from '../shopContext'
+import React from 'react'
 
-type Props = {
-  title: string,
-  price: number,
-  description: string,
-  state: string,
-  inventory: number,
-}
+import { ProductsProps,  useShoppingCart } from '../shopContext'
 
 
-const Products = ({ title, price, description, state, inventory }:Props) => {
-  const context = useContext(productContext)
-  const item = { title, price, description, state, inventory }
+const Products: React.FC<ProductsProps> = ({products}) => {
+  const {addToCart} = useShoppingCart()
   
-  const handleClick = (items: object) => {    
-    context.setCartItems(items)
-  }
+  // const product: ProductsProps = {id, title, price, description, inventory}
 
   return (
     <div>
-      {state === 'Created' ? (
+      
         <div className="p-[10px] bg-white border rounded-lg m-[5px] flex flex-col gap-5">
           <div className="bg-[#b4b4b4] rounded w-fit px-[5px] text-sm text-[#fff5f5] flex flex-row gap-2">
-            <div className="text-[#ffffff]">{title}</div>
+            <div className="text-[#ffffff]">{products.title}</div>
           </div>
 
           <div className="bg-[#b4b4b4] rounded w-fit px-[5px] text-sm text-[#fff5f5] flex flex-row gap-2">
-            <div className="text-[#ffffff]">{description}</div>
+            <div className="text-[#ffffff]">{products.description}</div>
           </div>
           <div className="bg-[#b4b4b4] rounded w-fit px-[5px] text-sm text-[#fff5f5] flex flex-row gap-2">
-            <div className="text-[#ffffff]">${price}</div>
+            <div className="text-[#ffffff]">${products.price}</div>
+          </div>
+          <div className="bg-[#b4b4b4] rounded w-fit px-[5px] text-sm text-[#fff5f5] flex flex-row gap-2">
+            <div className="text-[#ffffff]">Quantity: {products.inventory}</div>
           </div>
           <button
             className="bg-[#adadad] w-fit text-[10px] p-[10px] rounded-3xl text-[#fff]"
-            onClick={(e) => {
-              e.preventDefault()
-              console.log('clicked')
-              handleClick(item)
+            onClick={() => {addToCart(products);              
             }}
           >
             Add to cart
           </button>
         </div>
-      ) : null}
+   
     </div>
   )
 }
