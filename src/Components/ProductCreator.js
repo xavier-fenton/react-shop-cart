@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import ProductCreatorForm from './ProductCreatorForm.js'
 
-const ProductCreator = ({ state }) => {
+const ProductCreator = () => {
   const [active, setActive] = useState(false)
   return (
     <div className="flex flex-col items-center">
