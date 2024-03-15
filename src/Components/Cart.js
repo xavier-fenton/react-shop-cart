@@ -3,8 +3,8 @@ import CartItems from './CartItems'
 const Cart = () => {
   const [value, setValue] = useState([])
   const [loading, setLoading] = useState(true)
-  const [empty, setEmpty] = useState(true)
-  const length = value.length !== 0
+  const [empty, setEmpty] = useState(null)
+  let length = value.length !== 0
 
   useEffect(() => {
     const fetchData = async () => {
@@ -13,6 +13,9 @@ const Cart = () => {
         if (localItems) {
           setValue(JSON.parse(localItems))
           setEmpty(false)
+        }
+        if (localItems === '[]') {
+          setEmpty(true)
         }
       } catch (error) {
         console.error('Error fetching data from localStorage:', error)
