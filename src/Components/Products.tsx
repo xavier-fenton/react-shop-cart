@@ -1,12 +1,28 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { ProductsProps,  useShoppingCart } from '../context/shopContext'
 
 
 const Products: React.FC<ProductsProps> = ({products}) => {
   const {addToCart} = useShoppingCart()
-  
-  // const product: ProductsProps = {id, title, price, description, inventory}
+  const [change, setChange] = useState(false)
+
+  useEffect(() => {
+    const fetchdata = async () =>{
+      try{
+        const readLocalStorage = localStorage.getItem('shopping_cart')
+        return readLocalStorage
+      } catch (error){
+        console.error('A problem finding localStorage',error)
+      } finally {
+        setChange(false)
+      }
+      
+    }
+    fetchdata()
+  }, [change])
+
+
 
   return (
     <div>
@@ -27,7 +43,9 @@ const Products: React.FC<ProductsProps> = ({products}) => {
           </div>
           <button
             className="bg-[#adadad] w-fit text-[10px] p-[10px] rounded-3xl text-[#fff]"
-            onClick={() => {addToCart(products);              
+            onClick={() => {
+              addToCart(products)
+              setChange(true)              
             }}
           >
             Add to cart

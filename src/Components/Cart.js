@@ -2,14 +2,15 @@ import React, { useEffect, useState } from 'react'
 import CartItems from './CartItems'
 const Cart = () => {
   const [value, setValue] = useState([])
-  const [loading, setLoading] = useState(true)
-  const [empty, setEmpty] = useState(null)
-  let length = value.length !== 0
+  const [loading, setLoading] = useState(Boolean)
+  const [empty, setEmpty] = useState(Boolean)
 
   useEffect(() => {
     const fetchData = async () => {
       try {
+        setLoading(true)
         const localItems = localStorage.getItem('shopping_cart')
+
         if (localItems) {
           setValue(JSON.parse(localItems))
           setEmpty(false)
@@ -23,9 +24,10 @@ const Cart = () => {
         setLoading(false)
       }
     }
-
     fetchData()
-  }, [empty, length])
+    
+    
+  }, [])
 
   const loader = <div>loading...</div>
 
