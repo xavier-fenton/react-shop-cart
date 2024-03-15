@@ -1,5 +1,7 @@
 # Creating a basic shop to understand global state, React and Tailwind
 
+### Feel free to give some feedback, it'd be much appreciated. Because working by yourself is hard, and fun. But I can easily mistaken a lot of things on the way.
+
 ## Documenting the process
 1. Currently building a store using JavaScript.
  <br>
