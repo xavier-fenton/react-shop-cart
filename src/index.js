@@ -7,6 +7,8 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import './index.css'
 import Test from './Components/Test.tsx'
 import ProductsColumn from './Components/ProductsColumn'
+import { ShoppingCartProvider } from './shopContext'
+import TestLocalStorage from './Components/TestLocalStorage'
 
 const router = createBrowserRouter([
   {
@@ -18,8 +20,17 @@ const router = createBrowserRouter([
     element: <Test />,
   },
   {
+    path: '/testLocalStorage',
+    element: <TestLocalStorage />,
+  },
+  {
     path: '/products',
-    element: <ProductsColumn />,
+    element: (
+      //this is weird: refactor at some point
+      <ShoppingCartProvider>
+        <ProductsColumn />
+      </ShoppingCartProvider>
+    ),
   },
 ])
 const root = ReactDOM.createRoot(document.getElementById('root'))
